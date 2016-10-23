@@ -1,0 +1,6 @@
+      invoke  active_record
+      create    db/migrate/20161018095011_create_borsas.rb
+      create    app/models/borsa.rb
+      invoke    test_unit
+      create      test/models/borsa_test.rb
+      create      test/fixtures/borsas.yml

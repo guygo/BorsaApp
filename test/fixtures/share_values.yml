@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Date: MyString
+  AdjustedClosingPrice: 9.99
+  ClosingPrice: 9.99
+  Change: MyString
+  OpeningPrice: 9.99
+  BasePrice: 9.99
+  High: 9.99
+  Low: 9.99
+  CapitalListedforTrading: 9.99
+  MarketCap: 9.99
+  Turnover: 9.99
+  Volume: 9.99
+  Trans: 9.99
+  ExType: MyString
+  ExCoefficient: MyString
+  IndexAdjustedNoofShares: 9.99
+  IndexAdjustedFreeFloatRate: 9.99
+  LastIANSUpdate: 9.99
+
+two:
+  Date: MyString
+  AdjustedClosingPrice: 9.99
+  ClosingPrice: 9.99
+  Change: MyString
+  OpeningPrice: 9.99
+  BasePrice: 9.99
+  High: 9.99
+  Low: 9.99
+  CapitalListedforTrading: 9.99
+  MarketCap: 9.99
+  Turnover: 9.99
+  Volume: 9.99
+  Trans: 9.99
+  ExType: MyString
+  ExCoefficient: MyString
+  IndexAdjustedNoofShares: 9.99
+  IndexAdjustedFreeFloatRate: 9.99
+  LastIANSUpdate: 9.99

@@ -1,0 +1,77 @@
+
+
+//the script send by share controller
+// share data
+var javascript_side_json = <%=raw @data %>;
+var name= <%=raw @name %>;
+
+var ctx, dat, datelabels, dates, dt, i, len, myNewChart, obj, options, parts, prices, ref;
+datelabels = [];
+dates = [];
+prices = [];
+ref = javascript_side_json;
+for (i = 0, len = ref.length; i < len; i++) {
+  obj = ref[i];
+  prices.push(obj["Price"]);
+  parts = obj.Date.split('/');
+  dt = new Date(parts[2], parts[1] - 1, parts[0]);
+  datelabels.push(new Date(dt));
+}
+// genreate chart
+ctx = document.getElementById("myChart").getContext("2d");
+ctx.canvas.width = 1000;
+ctx.canvas.height = 500;
+options = {
+  maintainAspectRatio: true,
+  responsive: false,
+  scales: {
+    xAxes: [
+      {
+        type: 'time',
+        time: {
+          displayFormats: {
+            'millisecond': 'MMM DD',
+            'second': 'MMM DD',
+            'minute': 'MMM DD',
+            'hour': 'MMM DD',
+            'day': 'MMM DD',
+            'week': 'MMM DD',
+            'month': 'MMM DD',
+            'quarter': 'MMM DD',
+            'year': 'MMM DD'
+          }
+        },
+        ticks: {
+          maxRotation: 30,
+          padding: 20
+        }
+      }
+    ],
+    yAxes: [
+      {
+        display: true
+      }
+    ]
+  }
+};
+dat = {
+  labels: datelabels,
+  datasets: [
+    {
+      label: name,
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      backgroundColor: ['rgba(25, 199, 132, 0.2)', 'rgba(54, 212, 35, 0.2)', 'rgba(25, 206, 86, 0.2)', 'rgba(75, 231, 19, 0.2)', 'rgba(153, 222, 55, 0.2)', 'rgba(25, 223, 64, 0.2)'],
+      data: prices
+    }
+  ]
+};
+myNewChart = new Chart(ctx, {
+  type: "line",
+  data: dat,
+  options: options
+});

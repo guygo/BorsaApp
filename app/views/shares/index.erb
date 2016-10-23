@@ -1,0 +1,16 @@
+
+<p><label for = "Share_subject_id">Select Share</label>:
+  <%= form_for :Share,remote:true , url: {action: "create"}  do |f| %>
+  <%= f.collection_select(:Share_id, @list, :id, :name) %></p>
+      <%= f.submit "Show"  %>
+
+  <% end -%>
+
+
+
+</div>
+
+
+  <div class='container'>
+    <canvas id="myChart" ></canvas>
+  </div>

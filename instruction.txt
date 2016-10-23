@@ -1,0 +1,74 @@
+
+installation instructions:
+
+first make sure that you had installed rails:  http://railsinstaller.org/en
+
+if bundler exist(should be installed right now with rails install)
+
+
+
+
+
+make sure that you have mysql installed :https://www.mysql.com/downloads/
+if you prefer another db than change
+ and install a gem for by gem install
+database yml file 
+the file look like this:
+
+			default: &default
+			  adapter: {your sql }
+			  encoding: utf8
+			  pool: 5
+			  username: root
+			  password: zxcdsa
+			  host: localhost
+
+			development:
+			  <<: *default
+			  database: {db name}
+
+			# Warning: The database defined as "test" will be erased and
+			# re-generated from your development database when you run "rake".
+			# Do not set this db to the same as development or production.
+			test:
+			  <<: *default
+			  database: {db name}
+
+			# As with config/secrets.yml, you never want to store sensitive information,
+			# like your database password, in your source code. If your source code is
+			# ever seen by anyone, they now have access to your database.
+			#
+			# Instead, provide the password as a unix environment variable when you boot
+			# the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
+			# for a full rundown on how to provide these environment variables in a
+			# production deployment.
+			#
+			# On Heroku and other platform providers, you may have a full connection URL
+			# available as an environment variable. For example:
+			#
+			#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
+			#
+			# You can use this database configuration with:
+			#
+			#   production:
+			#     url: <%= ENV['DATABASE_URL'] %>
+			#
+			production:
+			  <<: *default
+			  database: {db name}
+			  username: root
+			  password: <%= ENV['SHARES_DATABASE_PASSWORD'] %> 
+
+run bundle install in your project folder for installing all gems
+
+note somtimes there is a ssl error you can look for a fix in this link :http://stackoverflow.com/questions/10246023/bundle-install-fails-with-ssl-certificate-verification-error
+
+
+
+you almost done
+
+if  database.yml remain as default   generate database called mydb
+
+now
+all that remains is to run the command rake db:migrate for genreate all tables 
+and than rake db:seed  for poplate them
