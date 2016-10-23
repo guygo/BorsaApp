@@ -67,8 +67,10 @@ note somtimes there is a ssl error you can look for a fix in this link :http://s
 
 you almost done
 
-if  database.yml remain as default   generate database called mydb
-
+if  database.yml remain as default   
+from the command line run this commands  :
+*must be at same folder of project
+run rake db:create
 now
 all that remains is to run the command rake db:migrate for genreate all tables 
 and than rake db:seed  for poplate them
