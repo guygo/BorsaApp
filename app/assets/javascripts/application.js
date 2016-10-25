@@ -13,4 +13,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min.js
+//= require bootstrap-datepicker
 //= require_tree .

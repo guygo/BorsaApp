@@ -2,8 +2,10 @@
 <p><label for = "Share_subject_id">Select Share</label>:
   <%= form_for :Share,remote:true , url: {action: "create"}  do |f| %>
   <%= f.collection_select(:Share_id, @list, :id, :name) %></p>
-      <%= f.submit "Show"  %>
+      <%= f.text_field :StartingDate,"data-provide"=>'datepicker', data: { date_format: 'dd/mm/yyyy' }  %>
+      <%= f.text_field :EndingDate,"data-provide"=>'datepicker', data: { date_format: 'dd/mm/yyyy' } %>
 
+      <%= f.submit "Show Chart"  %>
   <% end -%>
 
 
