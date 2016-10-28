@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
       #route=>{contrller}{function}
-  get 'api/ShareByName/:name'=>'api#ShareByName'
-  get 'api/'=>'api#index'
+
+  namespace :api , default:{format:'json'} do
+    namespace :v1 do
+      resources :shares
+    end
+  end
+
   get 'home/index'
   root 'home#index'
   resources :shares

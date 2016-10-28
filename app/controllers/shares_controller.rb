@@ -1,7 +1,7 @@
 
 
 
-#manage Rest api for share db
+
 class SharesController < ApplicationController
 
   def index

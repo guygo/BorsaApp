@@ -21,6 +21,7 @@ class ShareService
 
 
 #get data of share by share id and company id
+
   def self.GetShareData(shareid,companyid,startDate,endDate)
 
     OpenURI::Buffer.send :remove_const, 'StringMax' if OpenURI::Buffer.const_defined?('StringMax')
