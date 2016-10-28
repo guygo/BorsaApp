@@ -8,9 +8,9 @@ require 'csv'
 
 class Seeder
 
+    def CreareDataForDB
 
-
-    def self.CreareDataForDB
+      SeedShareData()
       if(Share.count==0)
         SeedShares()
         SeedShareData()
@@ -18,10 +18,7 @@ class Seeder
         return
       end
      puts "db is already created"
-
-
     end
-
     #fill database with essential data (shares,prices and more)
     #run with rake db:seed
     def SeedShares
@@ -39,9 +36,17 @@ class Seeder
       if(!share.CompanySerial.nil?&&!share.ShareSerial.nil?)
 
         browser.goto "http://www.tase.co.il/Eng/General/Company/Pages/companyHistoryData.aspx?companyID="+share.CompanySerial+"&subDataType=0&shareID="+share.ShareSerial rescue notok=true
-        sleep 10
-        browser.input(value:'rbPeriod3').click
-        sleep 1
+        sleep 5
+        maybe_not_exist=0
+        while( !browser.input(value:'rbPeriod5'))
+          browser.goto "http://www.tase.co.il/Eng/General/Company/Pages/companyHistoryData.aspx?companyID="+share.CompanySerial+"&subDataType=0&shareID="+share.ShareSerial rescue notok=true
+        maybe_not_exist+=1
+          if(maybe_not_exist>5)
+            return
+          end
+        end
+        browser.input(value:'rbPeriod5').click
+        sleep 2
         browser.input(value:"Display Data").click
         sleep 2
         doc=Nokogiri::HTML.parse(browser.html)
@@ -87,12 +92,14 @@ class Seeder
             index+=1
           }
         }
-        share.share_values.update(data)
+        share.share_values.create(data)
 
         browser.close
       end
 
     end
+
+
     def SeedShareData
       Watir.driver = 'webdriver'
       Watir.load_driver
@@ -117,16 +124,15 @@ class Seeder
 
           threadid+=1
           #make sure the that the web isn't overloading
-          if(threadid%8==0)
+          if(threadid%10==0)
             ThreadsWait.all_waits(*threads)
             threads=[]
           end
         }
     end
 
-  private :WebReader,:SeedShares,:SeedShareData
-
 end
-Seeder.CreareDataForDB
+s=Seeder.new
+s.CreareDataForDB
 
 

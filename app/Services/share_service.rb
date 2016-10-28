@@ -21,16 +21,19 @@ class ShareService
 
 
 #get data of share by share id and company id
-  def self.GetShareData(shareid,companyid)
+
+  def self.GetShareData(shareid,companyid,startDate,endDate)
 
     OpenURI::Buffer.send :remove_const, 'StringMax' if OpenURI::Buffer.const_defined?('StringMax')
     OpenURI::Buffer.const_set 'StringMax', 0
     csvdata=[]
-
-    encoded_url = URI.encode("http://www.tase.co.il/_layouts/Tase/ManagementPages/Export.aspx?sn=none&GridId=128&AddCol=1&Lang=he-IL&ct=1&oid=#{shareid}&ot=1&cp=8&cf=0&cv=0&cl=0&cgt=1&dfrom=11/04/2016&dto=10/10/2016&CmpID=#{companyid}&subT=0&ExportType=3")
+    url= "http://www.tase.co.il/_layouts/Tase/ManagementPages/Export.aspx?sn=none&GridId=128&AddCol=1&Lang=he-IL&ct=1&oid=#{shareid}&ot=1&cp=8&cf=0&cv=0&cl=0&cgt=1&dfrom=#{startDate}&dto=#{endDate}&CmpID=#{companyid}&subT=0&ExportType=3"
+    puts url
+    encoded_url = URI.encode(url)
     uri=URI.parse(encoded_url)
     x=0
     file=open(uri)
+
     quote_chars = %w(" | ~ ^ & *)
     CSV.foreach(file,encoding: "iso-8859-1:UTF-8",:quote_char => "|") do |row|
       x+=1

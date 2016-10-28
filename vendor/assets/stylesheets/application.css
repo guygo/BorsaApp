@@ -13,4 +13,5 @@
  *= require_tree ../../../app/assets/stylesheets
  *= require_self
  *= require bootstrap.min.css
+ *= require bootstrap-datepicker3
  */
